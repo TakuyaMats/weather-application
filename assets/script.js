@@ -1,5 +1,5 @@
 function getApi() {
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=40.850922&lon=-73.973412&exclude=hourly,daily&appid=7d3afb4e42d64b1033626322feda44f4';
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=40.850922&lon=-73.973412&exclude=hourly,daily&appid=';
 
     console.log(requestUrl)
 
