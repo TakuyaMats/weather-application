@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather Application</title>
+</head>
+
+<body>
+
+    <body class="min-100-vh flex-column">
+        <header class="p-5 text-center text-white bg-primary">
+            <h1>Weather Dashboard</h1>
+        </header>
+        <main class="flex-row justify-center align-center col-auto p-4 bg-light">
+            <section id="city-search" class="card card-rounded col-2 bg-white">
+                <label for="searchingCities" class="form-label">Search for a City:</label>
+                <input class="form-control" list="datalistOptions" id="searchingCities" placeholder="Type to search...">
+                <datalist id="datalistOptions">
+                    <option value="San Francisco">
+                    <option value="New York">
+                    <option value="Seattle">
+                    <option value="Los Angeles">
+                    <option value="Chicago">
+                </datalist>
+            </section>
+            <button ype="button" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+            <ul class="searchHistory">
+                <li class="list-history-item">City</li>
+            </ul>
+        </main>
+        <div class="flex-row justify-center align-center col-auto p-4 bg-light">
+            <section class="card card-rounded col-6 bg-white">
+                <div class="card-header text-center">
+                    <h2 class="text-black">Atlanta dates</h2>
+                </div>
+            </section>
+        </div>
+        <div class="container">
+            <div class="row">
+                <footer>
+                    <h2>5-Day Forecast:</h2>
+                    <div class="col-sm" id="forecast"></div>
+                </footer>
+            </div>
+        </div>
+        <script type="text/javascript" src="./assets/script.js"></script>
+    </body>
+
+</html>
