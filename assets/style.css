@@ -13,3 +13,15 @@ header {
     background-color: grey;
 
 }
+
+.favorable {
+    background-color: rgb(34,139,34);
+}
+
+.moderate {
+    background-color: rgb(255,255,51);
+}
+
+.severe {
+    background-color: rgb(255,0,0);
+}
