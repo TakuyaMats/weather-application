@@ -23,13 +23,13 @@
                     <input id="city-input" name="search-input" type="text" class="form-input"
                         placeholder="Enter city name">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="search-button">
+                        <button class="btn btn-primary" type="submit" id="search-button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear history</button>
-                <form id="history"></form>
+                <div id="search-history"></div>
             </form>
             <div class="col-8">
                 <div class="row mr-0">
@@ -62,56 +62,54 @@
                         </div>
                     </div>
                 </div>
-               
-                    <div class="col-12">
-                        <h3>5-Day Forecast</h3>
+                <div class="col-12">
+                    <h3>5-Day Forecast</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day1Date"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img id="day1Weather-icon" src="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day1Temp"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day1Humidity"></p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day1Date"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <img id="day1Weather-icon" src="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day1Temp"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day1Humidity"></p>
-                                </div>
+                    <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day2Date"></p>
                             </div>
                         </div>
-                        <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day2Date"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <img id="day2Weather-icon" src="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day2Temp"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-2">
-                                    <p id="day2Humidity"></p>
-                                </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img id="day2Weather-icon" src="">
                             </div>
                         </div>
-                  
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day2Temp"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day2Humidity"></p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
                         <div class="row">
                             <div class="col-2">
@@ -134,53 +132,53 @@
                             </div>
                         </div>
                     </div>
-                <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
-                    <div class="row">
-                        <div class="col-2">
-                            <p id="day4Date"></p>
+                    <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day4Date"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <img id="day4Weather-icon" src="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day4Temp"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day4Humidity"></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <img id="day4Weather-icon" src="">
+                    <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day5Date"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <p id="day4Temp"></p>
+                        <div class="row">
+                            <div class="col-2">
+                                <img id="day5Weather-icon" src="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <p id="day4Humidity"></p>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day5Temp"></p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            <div class="col-md-2 forecast bg-primary text-white ml-3 mb-3 rounded">
-                <div class="row">
-                    <div class="col-2">
-                        <p id="day5Date"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <img id="day5Weather-icon" src="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <p id="day5Temp"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <p id="day5Humidity"></p>
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="day5Humidity"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-    </div>
     </div>
     </div>
     </div>

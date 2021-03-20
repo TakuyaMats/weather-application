@@ -1,7 +1,8 @@
 let searchButton = document.getElementById('search-button');
 let clearHistory = document.getElementById('clear-history');
+let historyEl = document.querySelector('#search-history');
 let cityInput = document.querySelector('#city-input');
-let formElement = document.getElementById('form-element');
+let formElement = document.querySelector('#form-element');
 let cityName = document.getElementById('city-name');
 let weatherIcon = document.getElementById('weather-icon');
 let temperature = document.getElementById('temperature');
@@ -41,7 +42,7 @@ let weatherDay3 = document.getElementById('weather-3');
 let weatherDay4 = document.getElementById('weather-4');
 let weatherDay5 = document.getElementById('weather-5');
 
-let headingDate = moment().subtract(10, 'days').calendar()
+let headingDate = moment().format('L');
 let headingDate1 = moment().add(1, 'days').format('l');
 let headingDate2 = moment().add(2, 'days').format('l');
 let headingDate3 = moment().add(3, 'days').format('l');
@@ -50,7 +51,10 @@ let headingDate5 = moment().add(5, 'days').format('l');
 
 
 let formSubmitHandler = function (event) {
+
     event.preventDefault();
+
+    console.log(event.target)
 
     let city = cityInput.value.trim();
 
@@ -60,9 +64,17 @@ let formSubmitHandler = function (event) {
         cityName.textContent = '';
         cityInput.value = '';
 
-    } else {
-        alert('Please enter a city name');
+    };
+
+    historyButton(city)
+    let userInputLocalStorage = localStorage.getItem('cities') || [];
+
+    if (userInputLocalStorage.length > 0) {
+        userInputLocalStorage = JSON.parse(userInputLocalStorage)
     }
+    userInputLocalStorage.push(city)
+    let stringifyCity = JSON.stringify(userInputLocalStorage)
+    localStorage.setItem("cities", stringifyCity)
 };
 
 function getApi(city) {
@@ -191,58 +203,24 @@ function displayFeatures(data) {
     }
 }
 
-
-// Make a form element in html and make it the parent, then replace cityInput element.
-formElement.addEventListener('submit', formSubmitHandler)
-
-
-
-function renderSearchHistory() {
-    historyEl.empty()
-    for (let i = 0; i < searchHistory.length; i++) {
-        const historyItem = document.createElement("input");
-        historyItem.setAttribute("type", "text");
-        historyItem.setAttribute("readonly", true);
-        historyItem.setAttribute("class", "form-control d-block bg-white");
-        historyItem.setAttribute("value", searchHistory[i]);
-        historyItem.addEventListener("click", function () {
-            getCityName(historyItem.value);
-            getFiveDay(historyItem.value);
-
-        });
-        historyEl.append(historyItem);
-    }
+function historyButton(city) {
+    let cityButton = document.createElement('button');
+    cityButton.textContent = city;
+    cityButton.setAttribute('class', "city-btn")
+    historyEl.appendChild(cityButton);
+    cityButton.addEventListener('click', function (e) {
+        let newButton = this.textContent
+        getApi(newButton)
+        e.stopPropagation();
+        e.preventDefault();
+    })
 }
 
+let userInputLocalStorage = localStorage.getItem('cities');
+userInputLocalStorage = JSON.parse(userInputLocalStorage) || [];
 
+for (i = 0; i < userInputLocalStorage.length; i++) {
+    historyButton(userInputLocalStorage[i])
+}
 
-
-
-
-var searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
-console.log(searchHistory);
-
-// var cities = JSON.parse(localStorage.getItem("cities")) || [];
-// searchHistory.push(city);
-// localStorage.setItem("cities", JSON.stringify(searchHistory));
-// renderSearchHistory();
-
-// var formSubmitHandler = function (event) {
-//     event.preventDefault();
-
-//     var city = cityInputEl.val().trim();
-
-//     if (city) {
-//         getCityName(city);
-//         getFiveDay(city);
-//         cityInputEl.text("");
-//         cityInputEl.val("");
-
-//         var cities = JSON.parse(localStorage.getItem("cities")) || [];
-//         searchHistory.push(city);
-//         localStorage.setItem("cities", JSON.stringify(searchHistory));
-//         renderSearchHistory();
-//     } else {
-//         alert("Please Enter a Valid City Name");
-//     }
-// };
+formElement.addEventListener('submit', formSubmitHandler);
