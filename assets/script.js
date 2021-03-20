@@ -10,10 +10,32 @@ let windSpeed = document.getElementById('wind-speed');
 let uvIndex = document.getElementById('UV-index');
 let forecast = document.getElementsByClassName('forecast');
 let imgEl = document.querySelector('img');
+
 let day1Date = document.getElementById('day1Date');
 let day1Icon = document.getElementById('day1Weather-icon');
 let day1Temp = document.getElementById('day1Temp');
 let day1Humidity = document.getElementById('day1Humidity');
+
+let day2Date = document.getElementById('day2Date');
+let day2Icon = document.getElementById('day2Weather-icon');
+let day2Temp = document.getElementById('day2Temp');
+let day2Humidity = document.getElementById('day2Humidity');
+
+let day3Date = document.getElementById('day3Date');
+let day3Icon = document.getElementById('day3Weather-icon');
+let day3Temp = document.getElementById('day3Temp');
+let day3Humidity = document.getElementById('day3Humidity');
+
+let day4Date = document.getElementById('day4Date');
+let day4Icon = document.getElementById('day4Weather-icon');
+let day4Temp = document.getElementById('day4Temp');
+let day4Humidity = document.getElementById('day4Humidity');
+
+let day5Date = document.getElementById('day5Date');
+let day5Icon = document.getElementById('day5Weather-icon');
+let day5Temp = document.getElementById('day5Temp');
+let day5Humidity = document.getElementById('day5Humidity');
+
 let weatherDay2 = document.getElementById('weather-2');
 let weatherDay3 = document.getElementById('weather-3');
 let weatherDay4 = document.getElementById('weather-4');
@@ -101,7 +123,7 @@ function getFeatures(lat, lon) {
 
 function displayFeatures(data) {
 
-    let fiveDays = data.daily.slice(0,5);
+    let fiveDays = data.daily.slice(0, 5);
 
     // DAY ONE
     let dayOneIcon = fiveDays[0].weather[0].icon;
@@ -114,20 +136,44 @@ function displayFeatures(data) {
     day1Humidity.textContent = ('Humidity: ' + dayOneHumidity + '%');
 
     // // DAY TWO
-    // let dayTwoTemp = Math.round(fiveDays[1].temp.day);
-    // weatherDay2.textContent = ("Temperature: " + dayTwoTemp + "°F");
+    let dayTwoIcon = fiveDays[1].weather[0].icon;
+    let dayTwoTemp = fiveDays[1].temp.day;
+    let dayTwoHumidity = Math.round(fiveDays[1].humidity);
+    let day2IconUrl = "http://openweathermap.org/img/w/" + dayTwoIcon + ".png";
+    day2Date.textContent = headingDate2;
+    day2Icon.setAttribute('src', day2IconUrl);
+    day2Temp.textContent = ("Temp: " + dayTwoTemp + "°F");
+    day2Humidity.textContent = ('Humidity: ' + dayTwoHumidity + '%');
 
     // // DAY THREE
-    // let dayThreeTemp = Math.round(fiveDays[2].temp.day);
-    // weatherDay3.textContent = ("Temperature: " + dayThreeTemp + "°F");
+    let dayThreeIcon = fiveDays[2].weather[0].icon;
+    let dayThreeTemp = fiveDays[2].temp.day;
+    let dayThreeHumidity = Math.round(fiveDays[2].humidity);
+    let day3IconUrl = "http://openweathermap.org/img/w/" + dayThreeIcon + ".png";
+    day3Date.textContent = headingDate3;
+    day3Icon.setAttribute('src', day3IconUrl);
+    day3Temp.textContent = ("Temp: " + dayThreeTemp + "°F");
+    day3Humidity.textContent = ('Humidity: ' + dayThreeHumidity + '%');
 
     // // DAY FOUR
-    // let dayFourTemp = Math.round(fiveDays[3].temp.day);
-    // weatherDay4.textContent = ("Temperature: " + dayFourTemp + "°F");
+    let dayFourIcon = fiveDays[3].weather[0].icon;
+    let dayFourTemp = fiveDays[3].temp.day;
+    let dayFourHumidity = Math.round(fiveDays[3].humidity);
+    let day4IconUrl = "http://openweathermap.org/img/w/" + dayFourIcon + ".png";
+    day4Date.textContent = headingDate4;
+    day4Icon.setAttribute('src', day4IconUrl);
+    day4Temp.textContent = ("Temp: " + dayFourTemp + "°F");
+    day4Humidity.textContent = ('Humidity: ' + dayFourHumidity + '%');
 
     // // DAY FIVE 
-    // let dayFiveTemp = Math.round(fiveDays[4].temp.day);
-    // weatherDay5.textContent = ("Temperature: " + dayFiveTemp + "°F");
+    let dayFiveIcon = fiveDays[4].weather[0].icon;
+    let dayFiveTemp = fiveDays[4].temp.day;
+    let dayFiveHumidity = Math.round(fiveDays[4].humidity);
+    let day5IconUrl = "http://openweathermap.org/img/w/" + dayFiveIcon + ".png";
+    day5Date.textContent = headingDate5;
+    day5Icon.setAttribute('src', day5IconUrl);
+    day5Temp.textContent = ("Temp: " + dayFiveTemp + "°F");
+    day5Humidity.textContent = ('Humidity: ' + dayFiveHumidity + '%');
 
     // UV Index
     let currentUv = Math.round(data.current.uvi);
@@ -148,3 +194,55 @@ function displayFeatures(data) {
 
 // Make a form element in html and make it the parent, then replace cityInput element.
 formElement.addEventListener('submit', formSubmitHandler)
+
+
+
+function renderSearchHistory() {
+    historyEl.empty()
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historyItem = document.createElement("input");
+        historyItem.setAttribute("type", "text");
+        historyItem.setAttribute("readonly", true);
+        historyItem.setAttribute("class", "form-control d-block bg-white");
+        historyItem.setAttribute("value", searchHistory[i]);
+        historyItem.addEventListener("click", function () {
+            getCityName(historyItem.value);
+            getFiveDay(historyItem.value);
+
+        });
+        historyEl.append(historyItem);
+    }
+}
+
+
+
+
+
+
+var searchHistory = JSON.parse(localStorage.getItem("cities")) || [];
+console.log(searchHistory);
+
+// var cities = JSON.parse(localStorage.getItem("cities")) || [];
+// searchHistory.push(city);
+// localStorage.setItem("cities", JSON.stringify(searchHistory));
+// renderSearchHistory();
+
+// var formSubmitHandler = function (event) {
+//     event.preventDefault();
+
+//     var city = cityInputEl.val().trim();
+
+//     if (city) {
+//         getCityName(city);
+//         getFiveDay(city);
+//         cityInputEl.text("");
+//         cityInputEl.val("");
+
+//         var cities = JSON.parse(localStorage.getItem("cities")) || [];
+//         searchHistory.push(city);
+//         localStorage.setItem("cities", JSON.stringify(searchHistory));
+//         renderSearchHistory();
+//     } else {
+//         alert("Please Enter a Valid City Name");
+//     }
+// };
