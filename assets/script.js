@@ -9,14 +9,23 @@ let humidity = document.getElementById('humidity');
 let windSpeed = document.getElementById('wind-speed');
 let uvIndex = document.getElementById('UV-index');
 let forecast = document.getElementsByClassName('forecast');
-let imgEl = document.querySelector('img')
-let weatherDay1 = document.getElementById('weather-1')
-let weatherDay2 = document.getElementById('weather-2')
-let weatherDay3 = document.getElementById('weather-3')
-let weatherDay4 = document.getElementById('weather-4')
-let weatherDay5 = document.getElementById('weather-5')
+let imgEl = document.querySelector('img');
+let day1Date = document.getElementById('day1Date');
+let day1Icon = document.getElementById('day1Weather-icon');
+let day1Temp = document.getElementById('day1Temp');
+let day1Humidity = document.getElementById('day1Humidity');
+let weatherDay2 = document.getElementById('weather-2');
+let weatherDay3 = document.getElementById('weather-3');
+let weatherDay4 = document.getElementById('weather-4');
+let weatherDay5 = document.getElementById('weather-5');
 
 let headingDate = moment().subtract(10, 'days').calendar()
+let headingDate1 = moment().add(1, 'days').format('l');
+let headingDate2 = moment().add(2, 'days').format('l');
+let headingDate3 = moment().add(3, 'days').format('l');
+let headingDate4 = moment().add(4, 'days').format('l');
+let headingDate5 = moment().add(5, 'days').format('l');
+
 
 let formSubmitHandler = function (event) {
     event.preventDefault();
@@ -93,29 +102,32 @@ function getFeatures(lat, lon) {
 function displayFeatures(data) {
 
     let fiveDays = data.daily.slice(0,5);
+
     // DAY ONE
-    let dayOneTemp = Math.round(fiveDays[0].temp.day);
-    weatherDay1.textContent = ("Temperature: " + dayOneTemp + "°F");
-    // DAY TWO
-    let dayTwoTemp = Math.round(fiveDays[1].temp.day);
-    weatherDay2.textContent = ("Temperature: " + dayTwoTemp + "°F");
-    // DAY THREE
-    let dayThreeTemp = Math.round(fiveDays[2].temp.day);
-    weatherDay3.textContent = ("Temperature: " + dayThreeTemp + "°F");
-    // DAY FOUR
-    let dayFourTemp = Math.round(fiveDays[3].temp.day);
-    weatherDay4.textContent = ("Temperature: " + dayFourTemp + "°F");
-    // DAY FIVE 
-    let dayFiveTemp = Math.round(fiveDays[4].temp.day);
-    weatherDay5.textContent = ("Temperature: " + dayFiveTemp + "°F");
+    let dayOneIcon = fiveDays[0].weather[0].icon;
+    let dayOneTemp = fiveDays[0].temp.day;
+    let dayOneHumidity = Math.round(fiveDays[0].humidity);
+    let day1IconUrl = "http://openweathermap.org/img/w/" + dayOneIcon + ".png";
+    day1Date.textContent = headingDate1;
+    day1Icon.setAttribute('src', day1IconUrl);
+    day1Temp.textContent = ("Temp: " + dayOneTemp + "°F");
+    day1Humidity.textContent = ('Humidity: ' + dayOneHumidity + '%');
 
-    // let fiveDayContainer = document.getElementById('fiveDaysForecast');
+    // // DAY TWO
+    // let dayTwoTemp = Math.round(fiveDays[1].temp.day);
+    // weatherDay2.textContent = ("Temperature: " + dayTwoTemp + "°F");
 
-    // for (i = 0; i < fiveDays.length; i++) {
-    //     fiveDayContainer += Math.round(fiveDays[i].temp.day)
-    //     let allWeatherIds = [weatherDay1, weatherDay2, weatherDay3, weatherDay4, weatherDay5]
-    //     allWeatherIds.textContent = ("Temperature: " + fiveDayContainer + "°F")
-    // }
+    // // DAY THREE
+    // let dayThreeTemp = Math.round(fiveDays[2].temp.day);
+    // weatherDay3.textContent = ("Temperature: " + dayThreeTemp + "°F");
+
+    // // DAY FOUR
+    // let dayFourTemp = Math.round(fiveDays[3].temp.day);
+    // weatherDay4.textContent = ("Temperature: " + dayFourTemp + "°F");
+
+    // // DAY FIVE 
+    // let dayFiveTemp = Math.round(fiveDays[4].temp.day);
+    // weatherDay5.textContent = ("Temperature: " + dayFiveTemp + "°F");
 
     // UV Index
     let currentUv = Math.round(data.current.uvi);
